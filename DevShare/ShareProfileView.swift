@@ -52,7 +52,11 @@ struct ShareProfileView: View {
             }
             .padding()
             .buttonStyle(.borderedProminent)
-            .fileImporter(isPresented: $showFilePicker, allowedContentTypes: [UTType(exportedAs: "com.saurabhjamadagni.DevShare.fileFormat")], allowsMultipleSelection: false) { result in
+            .fileImporter(
+                isPresented: $showFilePicker,
+                allowedContentTypes: [UTType.data],
+                allowsMultipleSelection: false
+            ) { result in
                 switch result {
                 case .success(let url):
                     guard let fileURL = url.first else {
