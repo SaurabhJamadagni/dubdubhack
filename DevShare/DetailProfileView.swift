@@ -36,7 +36,7 @@ struct DetailProfileView: View {
                                 CustomFont(text: "Twitter : Naf_Syed")
                                 CustomFont(text: "Linkedin : Nafeez Ahmed")
                                 CustomFont(text: "GitHub: NafSyed")
-                                CustomFont(text: "Hey, I'm Nafeez and I'm a Developer who build apps for apple platforms and I'd like to pulli it of with the best that I can!")
+                                CustomFont(text: "Hey, I'm Nafeez and I'm a Developer who build apps for apple platforms and I'd like to pulli it off with the best that I can!")
                                     .multilineTextAlignment(.center)
                                 
                             }

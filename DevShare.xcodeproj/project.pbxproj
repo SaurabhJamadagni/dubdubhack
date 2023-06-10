@@ -16,6 +16,7 @@
 		D1F3554D2A34F2B2004563CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3554C2A34F2B2004563CD /* ProfileView.swift */; };
 		D1F3554F2A34FBA8004563CD /* DetailProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F3554E2A34FBA8004563CD /* DetailProfileView.swift */; };
 		D1F355512A350C00004563CD /* ShareProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F355502A350C00004563CD /* ShareProfileView.swift */; };
+		D1F355542A3535F8004563CD /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F355532A3535F7004563CD /* PhotoPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D1F3554E2A34FBA8004563CD /* DetailProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProfileView.swift; sourceTree = "<group>"; };
 		D1F355502A350C00004563CD /* ShareProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareProfileView.swift; sourceTree = "<group>"; };
 		D1F355522A351456004563CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D1F355532A3535F7004563CD /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				1455C0362A34DD27003111FE /* AddDevView.swift */,
 				1455C0342A34DC4F003111FE /* DevModel.swift */,
 				D1F3554C2A34F2B2004563CD /* ProfileView.swift */,
+				D1F355532A3535F7004563CD /* PhotoPickerView.swift */,
 				D1F3554E2A34FBA8004563CD /* DetailProfileView.swift */,
 				1455C02A2A34C953003111FE /* Assets.xcassets */,
 				1455C02C2A34C953003111FE /* Preview Content */,
@@ -157,6 +160,7 @@
 				1455C0352A34DC4F003111FE /* DevModel.swift in Sources */,
 				1455C0292A34C952003111FE /* ContentView.swift in Sources */,
 				D1F3554D2A34F2B2004563CD /* ProfileView.swift in Sources */,
+				D1F355542A3535F8004563CD /* PhotoPickerView.swift in Sources */,
 				D1F355512A350C00004563CD /* ShareProfileView.swift in Sources */,
 				1455C0372A34DD27003111FE /* AddDevView.swift in Sources */,
 				1455C0272A34C952003111FE /* DevShareApp.swift in Sources */,
