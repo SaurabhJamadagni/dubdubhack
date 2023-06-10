@@ -15,21 +15,14 @@ struct ShareProfileView: View {
     @State private var dataToShare: [Any] = []
     
     @State private var showShareSheet = false
+    @State private var showFilePicker = false
+    
+    @State private var fileURL: URL?
     
     var body: some View {
         VStack {
             Text(dummy.name)
-            Button {
-//                showShareSheet.toggle()
-                // share complete
-//                guard let encodedData = try? NSKeyedArchiver.archivedData(withRootObject: dummy, requiringSecureCoding: false) else {
-//                    // Handle encoding failure
-//                    return
-//                }
-//                print("Hi")
-//                dataToShare = encodedData
-//                print("Button is tapped")
-                
+            Button {                
                 do {
                     let encoder = PropertyListEncoder()
                     let data = try encoder.encode(dummy)
@@ -49,18 +42,44 @@ struct ShareProfileView: View {
             .sheet(isPresented: $showShareSheet, content: {
                 ShareView(activityItems: dataToShare)
             })
-        }
-    }
-    
-    func JSONize() -> Data? {
-        do {
-            let jsonData = try JSONSerialization.data(withJSONObject: dummy, options: [])
-            return jsonData
-            // Use the jsonData as needed
-        } catch {
-            // Handle serialization error
-            print("Can't conver to JSON")
-            return nil
+            
+            Button {
+                fileURL = nil
+                showFilePicker.toggle()
+            } label: {
+                Text("Select file")
+                    .frame(maxWidth: .infinity, maxHeight: 44)
+            }
+            .padding()
+            .buttonStyle(.borderedProminent)
+            .fileImporter(isPresented: $showFilePicker, allowedContentTypes: [UTType(exportedAs: "com.saurabhjamadagni.DevShare.fileFormat")], allowsMultipleSelection: false) { result in
+                switch result {
+                case .success(let url):
+                    guard let fileURL = url.first else {
+                        print("No file found")
+                        return
+                    }
+                    
+                    let fileManager = FileManager.default
+                    if fileManager.fileExists(atPath: fileURL.path(percentEncoded: false)) {
+                        do {
+                            let fileData = try Data(contentsOf: fileURL)
+                            
+                            let decoder = PropertyListDecoder()
+                            let instance = try? decoder.decode(Dummy.self, from: fileData)
+                            
+                            print("Name: \(instance?.name ?? "Unknown")")
+                        } catch {
+                            print("Failed to read")
+                        }
+                    } else {
+                        print("file doesn't exist at path")
+                    }
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
 }
