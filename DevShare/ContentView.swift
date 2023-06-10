@@ -17,7 +17,10 @@ struct ContentView: View {
         NavigationStack {
             VStack {
                 ForEach(devs) { dev in
-                    Text(dev.devName)
+                    NavigationLink(dev.devName) {
+                        let newDummy = Dummy(name: dev.devName, github: dev.github)
+                        ShareProfileView(dummy: newDummy)
+                    }
                 }
             }
             .navigationTitle("Devs")
@@ -40,3 +43,4 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
