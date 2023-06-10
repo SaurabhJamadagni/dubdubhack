@@ -6,16 +6,34 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Query private var devs: [DevModel]
+    
+    @State private var showAddDevSheet = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                ForEach(devs) { dev in
+                    Text(dev.devName)
+                }
+            }
+            .navigationTitle("Devs")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showAddDevSheet = true
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .sheet(isPresented: $showAddDevSheet, content: {
+                AddDevView(dev: DevModel(devName: "Saurabh", github: "git"))
+            })
         }
-        .padding()
     }
 }
 
