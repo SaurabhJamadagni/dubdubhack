@@ -36,6 +36,7 @@
 				</array>
 			</dict>
 		</dict>
+		<dict/>
 	</array>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
@@ -60,5 +61,9 @@
 		</dict>
 		<dict/>
 	</array>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string>Yes</string>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 </dict>
 </plist>

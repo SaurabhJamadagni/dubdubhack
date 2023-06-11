@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-
+import PhotosUI
+import SwiftData
 struct ProfileView: View {
     @State private var text: String = ""
     @State private var phoneNumber: String = ""
@@ -16,6 +17,8 @@ struct ProfileView: View {
     @State private var github: String = ""
     @State private var bio: String = ""
     @State private var animatingColors: Bool = false
+    @State private var imageSelected: Bool = false
+    @State private var image = UIImage()
     let color = Color.purple
     var body: some View {
         ZStack {
@@ -34,18 +37,26 @@ struct ProfileView: View {
             ScrollView {
                 VStack {
                     ZStack(alignment: .bottomTrailing) {
-                        Circle()
-                            .stroke(.white.opacity(0.5),lineWidth: 3)
-                            .frame(width:100,height: 80)
-                        Button {
-                            
+                        
+                        Image(uiImage: self.image)
+                                .resizable()
+                                .cornerRadius(50)
+                                .padding(.all, 4)
+                                .frame(width: 120, height: 120)
+                                .background(Color.black.opacity(0.2))
+                                .aspectRatio(contentMode: .fill)
+                                .clipShape(Circle())
+                                .padding(8)
+                        Button  {
+                            imageSelected = true
                         }label: {
                             Image(systemName: "camera.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width:30,height: 20)
-                                .foregroundStyle(.white)
+                                .font(.title)
+                                .foregroundColor(.white)
                         }
+                    }
+                    .sheet(isPresented: $imageSelected) {
+                            ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
                     }
                     CustomTextField(placeholder: "Enter your name", text: $text)
                     CustomTextField(placeholder: "Enter your Phone Number", text: $phoneNumber)
@@ -110,3 +121,17 @@ struct CustomTextField: View {
   
     }
 }
+
+@Model
+class ExampleData{
+   
+    
+    let id = UUID()
+    let photo: Data?
+    
+    init(id: UUID , photo: Data?) {
+        self.id = id
+        self.photo = photo
+    }
+}
+

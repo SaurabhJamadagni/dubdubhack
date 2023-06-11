@@ -31,8 +31,6 @@ struct ShareProfileView: View {
                 } catch {
                     print("plist conversion failed")
                 }
-          
-                
             } label: {
                 Text("Share")
                     .frame(maxWidth: .infinity, maxHeight: 44)
@@ -54,7 +52,7 @@ struct ShareProfileView: View {
             .buttonStyle(.borderedProminent)
             .fileImporter(
                 isPresented: $showFilePicker,
-                allowedContentTypes: [UTType.data],
+                allowedContentTypes: [.data],
                 allowsMultipleSelection: false
             ) { result in
                 switch result {
@@ -64,8 +62,26 @@ struct ShareProfileView: View {
                         return
                     }
                     
+                    guard fileURL.startAccessingSecurityScopedResource() else {
+                        print("Can't access security scoped resource")
+                        
+                        return
+                    }
+                    
+                    
+                    defer { fileURL.stopAccessingSecurityScopedResource() }
+                    
+                    print(fileURL.absoluteString)
+                    
                     let fileManager = FileManager.default
-                    if fileManager.fileExists(atPath: fileURL.path(percentEncoded: false)) {
+
+                    if fileManager.isReadableFile(atPath: fileURL.path()) {
+                        print("is readable")
+                    } else {
+                        print("Can't read")
+                    }
+                    
+                    if fileManager.fileExists(atPath: fileURL.path()) {
                         do {
                             let fileData = try Data(contentsOf: fileURL)
                             
