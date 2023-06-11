@@ -9,17 +9,21 @@ import SwiftUI
 import PhotosUI
 import SwiftData
 struct ProfileView: View {
-    @State private var text: String = ""
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
+    
+    @State private var devName: String = ""
     @State private var phoneNumber: String = ""
     @State private var email: String = ""
     @State private var twitter: String = ""
     @State private var linkedin: String = ""
     @State private var github: String = ""
     @State private var bio: String = ""
-    @State private var animatingColors: Bool = false
     @State private var imageSelected: Bool = false
     @State private var image = UIImage()
-    let color = Color.purple
+    
+    @State private var animatingColors: Bool = false
+
     var body: some View {
         ZStack {
             LinearGradient(colors: [ .blue , .purple], startPoint:.topLeading, endPoint:  .bottomTrailing)
@@ -58,7 +62,7 @@ struct ProfileView: View {
                     .sheet(isPresented: $imageSelected) {
                             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
                     }
-                    CustomTextField(placeholder: "Enter your name", text: $text)
+                    CustomTextField(placeholder: "Enter your name", text: $devName)
                     CustomTextField(placeholder: "Enter your Phone Number", text: $phoneNumber)
                     CustomTextField(placeholder: "Enter your Email", text: $email)
                     CustomTextField(placeholder: "Enter your Twitter Handle", text: $twitter)
@@ -67,7 +71,9 @@ struct ProfileView: View {
                     CustomTextField(placeholder: "Enter your bio", text: $bio)
                     
                     Button {
-                        
+                        let newDev = DevModel(devName: devName, github: github, phoneNumber: phoneNumber, email: email, twitter: twitter, linkedin: linkedin, bio: bio)
+                        modelContext.insert(newDev)
+                        dismiss()
                     }label: {
                         VStack {
                             Text("Save")

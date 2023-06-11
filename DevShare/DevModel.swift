@@ -10,14 +10,22 @@ import SwiftData
 
 @Model
 final class DevModel {
-    var devName: String
-    var github: String
-
+    let devName: String
+    let github: String
+    let phoneNumber: String
+    let email: String
+    let twitter: String
+    let linkedin: String
+    let bio: String
     
-    init(devName: String, github: String) {
+    init(devName: String, github: String, phoneNumber: String, email: String, twitter: String, linkedin: String, bio: String) {
         self.devName = devName
         self.github = github
-     
+        self.phoneNumber = phoneNumber
+        self.email = email
+        self.twitter = twitter
+        self.linkedin = linkedin
+        self.bio = bio
     }
 }
 

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DetailProfileView: View {
+    @Bindable var dev: DevModel
+    
     var body: some View {
         ZStack {
             Image("Nafeez")
@@ -15,48 +17,43 @@ struct DetailProfileView: View {
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
                 .blur(radius: 20)
-                VStack {
-                    Image("Nafeez")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width:200,height: 240)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                    Text("Nafeez Ahmed")
-                        .font(.system(size: 40))
-                        .foregroundStyle(.white)
-                        .fontWeight(.heavy)
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(.black.opacity(0.3))
-                            .frame(width:350)
-                        ScrollView {
-                            VStack {
-                                CustomFont(text: "+9163697498390")
-                                CustomFont(text: "nafeezsyed.2003@gmail.com")
-                                CustomFont(text: "Twitter : Naf_Syed")
-                                CustomFont(text: "Linkedin : Nafeez Ahmed")
-                                CustomFont(text: "GitHub: NafSyed")
-                                CustomFont(text: "Hey, I'm Nafeez and I'm a Developer who build apps for apple platforms and I'd like to pulli it off with the best that I can!")
-                                    .multilineTextAlignment(.center)
-                                
-                            }
-                            .padding(30)
+            VStack {
+                Image("Nafeez")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width:200,height: 240)
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                Text(dev.devName)
+                    .font(.system(size: 40))
+                    .foregroundStyle(.white)
+                    .fontWeight(.heavy)
+                ZStack {
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.black.opacity(0.3))
+                        .frame(width:350)
+                    ScrollView {
+                        VStack {
+                            CustomFont(text: dev.phoneNumber)
+                            CustomFont(text: dev.email)
+                            CustomFont(text: "Twitter : \(dev.twitter)")
+                            CustomFont(text: "Linkedin : \(dev.linkedin)")
+                            CustomFont(text: "GitHub: \(dev.github)")
+                            CustomFont(text: dev.bio)
+                                .multilineTextAlignment(.center)
+                            
                         }
+                        .padding(30)
                     }
-                    .frame(width:350,height: 400)
-                    
-                    
                 }
-            
-             
-            
+                .frame(width:350,height: 400)
+            }
         }
     }
 }
 
-#Preview {
-    DetailProfileView()
-}
+//#Preview {
+//    DetailProfileView(dev: DevModel(devName: "test", github: "test@git"))
+//}
 
 
 struct CustomFont: View {

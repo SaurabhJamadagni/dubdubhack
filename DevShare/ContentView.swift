@@ -15,15 +15,13 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                ForEach(devs) { dev in
-                    NavigationLink(dev.devName) {
-                        let newDummy = Dummy(name: dev.devName, github: dev.github)
-                        ShareProfileView(dummy: newDummy)
-                    }
+            List(devs) { dev in
+                NavigationLink(dev.devName) {
+                    DetailProfileView(dev: dev)
                 }
             }
             .navigationTitle("Devs")
+            .listStyle(.plain)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -34,7 +32,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showAddDevSheet, content: {
-                AddDevView(dev: DevModel(devName: "Saurabh", github: "git"))
+                ProfileView()
             })
         }
     }
