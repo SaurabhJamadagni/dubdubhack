@@ -122,3 +122,16 @@ struct CustomTextField: View {
     }
 }
 
+@Model
+class ExampleData{
+   
+    
+    let id = UUID()
+    let photo: Data?
+    
+    init(id: UUID , photo: Data?) {
+        self.id = id
+        self.photo = photo
+    }
+}
+
